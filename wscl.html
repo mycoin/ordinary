@@ -1,0 +1,447 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script src="scripts/visual.js"></script>
+</head>
+<style>
+* {font-size:12px;}
+div {border:0px;}
+h2 {font-size:16px;}
+html,body {height:100%}
+.ec-vscroll {border:1px solid red;background:white;width:18px;padding:15px 0px 10px 0px;font-size:1px}
+.ec-hscroll {border:1px solid red;background:white;height:18px;padding:0px 10px 0px 15px;font-size:1px}
+.ec-vscroll-block,.ec-hscroll-block {border:1px solid black;background:white;font-size:1px}
+.ec-vscroll-prev,.ec-vscroll-next,.ec-hscroll-prev,.ec-hscroll-next {border:1px solid blue;background:white;font-size:1px}
+.ec-panel-corner {border:1px solid red;background:white;font-size:1px}
+.ec-panel-layout {border:1px solid green}
+.ec-item {border:1px solid white;background:white;height:16px}
+.ec-edit {border:1px solid black;width:120px;height:18px}
+.ec-text, .ec-select {width:100px;height:18px;border:1px solid black;background:white}
+.ec-select-options {border:1px solid black;background:white}
+.ec-select-button {border:1px solid blue;font-size:1px}
+.ec-select-text {border:0px}
+.ec-select-item-over {border:1px solid yellow;background:blue;color:white}
+.ec-calendar {width:50%;border:1px solid black;text-align:center}
+.ec-calendar-weekname{height:14px;border:0px}
+.ec-calendar-date{height:110px;border:0px}
+.ec-calendar-weekname-item{border:0px}
+.ec-calendar-date-item {border:1px solid red}
+.ec-calendar-date-item-disabled {border:1px solid red;color:#CCC}
+.ec-calendar-date-item-selected {background:#CCC}
+.ec-form {position:absolute;left:30px;width:100px;height:100px;border:1px solid black;background:white;padding-top:16px}
+.ec-form-title {border:1px solid red;position:absolute;left:0px;top:0px}
+.ec-form-main {border:1px solid blue}
+.ec-form-close {position:absolute;width:14px;height:14px;background:green;right:1px;top:1px;font-size:1px;border:0px}
+.ec-checkbox {border:1px solid black;width:16px;height:16px}
+.ec-checkbox-checked {background:black}
+.ec-checkbox-part {background:#CCC}
+.ec-radio {border:1px solid black;width:16px;height:16px;background:white}
+.ec-radio-checked {background:black}
+.radio2 {border:1px solid red;width:16px;height:16px}
+.radio2-checked {background:red}
+.ec-tree-items {padding-left:10px}
+.ec-tree-fold .ec-tree-items {display:none}
+.tree1 {color:red}
+.tree1-over {background:red;color:white}
+.tree1-fold .ec-tree-items {display:none}
+.ec-table {border:1px solid black;height:300px;padding-top:16px}
+.ec-table-head {border:0px}
+.ec-table td {line-height:16px;}
+.ec-table-area,.ec-table-layout {border:1px solid red;background:white}
+.ec-table-item {white-space:normal;border:0px}
+.ec-table-row-over {background:red;color:white}
+.ec-table-item-over {background:green;color:white}
+.ec-popup {border:1px solid black;width:120px}
+.ec-popup-item-over {border:1px solid yellow;background:blue;color:white}
+.ec-popup-item-complex-over {border:1px solid yellow;background:blue;color:white}
+.ec-exchange {border:1px solid black;width:100px;height:120px;background:white}
+.ec-exchange-item {border:1px solid white}
+.ec-exchange-item-select {background:blue;color:white;border:1px solid yellow}
+
+.ec-control-focus, .test2-focus, .test3-focus, .ec-select-focus .ec-select-text {background:red;color:white}
+.ec-control-over {background:blue;color:white}
+.ec-control-press {background:green;color:white}
+.outline {border-top:1px solid #FFF;border-left:1px solid #FFF;border-right:1px solid #404040;border-bottom:1px solid #404040}
+.inline {border-top:1px solid #D4D0C8;border-left:1px solid #D4D0C8;border-right:1px solid #808080;border-bottom:1px solid #808080;}
+.outline-press {border-top:1px solid #404040;border-left:1px solid #404040;border-right:1px solid #FFF;border-bottom:1px solid #FFF}
+.inline-press {border-top:1px solid #808080;border-left:1px solid #808080;border-right:1px solid #D4D0C8;border-bottom:1px solid #D4D0C8}
+.lrdecorator {border:1px solid red;padding:0px 4px}
+.tbdecorator {border:1px solid red;padding:4px 0px}
+.magicdecorator {border:1px solid red;padding:4px 4px}
+.lrdecorator-left, .lrdecorator-right, .tbdecorator-top, .tbdecorator-bottom {background:#CCC;font-size:1px}
+.magicdecorator-widget0, .magicdecorator-widget2, .magicdecorator-widget6, .magicdecorator-widget8 {background:#CCC;font-size:1px}
+.magicdecorator-widget1, .magicdecorator-widget3, .magicdecorator-widget5, .magicdecorator-widget7 {background:#000;font-size:1px}
+.test2-over {background:yellow;color:black}
+.test3 {width:50%;height:100px;}
+
+.select-box {background:#CCC;border:1px solid black}
+.exchange .select-box {background:transparent;border:1px dotted white}
+</style>
+<body style="border:0px">
+	<div>
+		<h2>1.基本控件效果测试</h2>
+		<table cellspacing="10">
+		<tr>
+			<td>
+				<div eui="type:control;id:test1" style="border:1px solid black;width:100px;height:100px">鼠标移入将变蓝, 激活状态是红色, 按压状态是绿色</div>
+			</td>
+			<td style="background:#D4D0C8">
+				<div eui="type:control;id:test2" class="test2" style="width:100px;height:100px;text-align:left">使用装饰器，鼠标移入将变黄, 激活状态是红色，按压时有仿3D效果</div>
+			</td>
+		</tr>
+		</table>
+		<div eui="type:control;id:test3" class="test3" style="border:1px solid black;">按比例设置宽度，先应用上下装饰器，再应用左右装饰器，最外层应用九宫格装饰器，激活时变红且滚动时提示方向, 失去激活时隐藏</div>
+	</div>
+	<div>
+		改变控件的大小(回车键确认)<input eui="type:edit;id:test4">
+	</div>
+	<h2>2.下拉框效果测试</h2>
+	<div>
+		<select eui="type:select;id:test6;option-size:3">
+			<option value="test1">测试1</option>
+			<option value="test2">测试2</option>
+			<option value="test3">测试3</option>
+			<option value="test4" selected>测试4</option>
+			<option value="test5">测试5</option>
+		</select>
+	</div>
+	<h2>3.带滚动条的层控件效果测试(支持鼠标滑轮)</h2>
+	<div eui="type:panel;id:test5;absolute:true" style="border:1px solid blue;width:330px;height:180px;line-height:15px">
+		<div>
+			第1行:测试滚动条的使用测试滚动条的使用测试滚动条的使用<br>
+			第2行:测试滚动条的使用测试滚动条的使用测试滚动条的使用<br>
+			第3行:测试滚动条的使用测试滚动条的使用测试滚动条的使用<br>
+			第4行:测试滚动条的使用测试滚动条的使用测试滚动条的使用<br>
+			第5行:测试滚动条的使用测试滚动条的使用测试滚动条的使用<br>
+			第6行:测试滚动条的使用测试滚动条的使用测试滚动条的使用<br>
+			第7行:测试滚动条的使用测试滚动条的使用测试滚动条的使用<br>
+			第8行:测试滚动条的使用测试滚动条的使用测试滚动条的使用<br>
+			第9行:测试滚动条的使用测试滚动条的使用测试滚动条的使用<br>
+			第10行:测试滚动条的使用<br>
+			第11行:测试滚动条的使用测试滚动条的使用测试滚动条的使用<br>
+			第12行:测试滚动条的使用测试滚动条的使用测试滚动条的使用<br>
+		</div>
+		<div style="position:absolute;top:183px">绝对定位</div>
+	</div>
+	<div>
+		滚动条模式
+		<button onclick="test5.setSize(330, 180)">同时</button>
+		<button onclick="test5.setSize(360, 160)">垂直</button>
+		<button onclick="test5.setSize(310, 220)">水平</button>
+		<button onclick="test5.setSize(340, 200)">无</button>
+	</div>
+	<h2>4.单选框与复选框效果测试</h2>
+	<div>
+		<table cellspacing="10">
+<tr>
+		<td>第一组单选框</td>
+		<td><div eui="type:radio;id:r1-1;name:r11"></td>
+		<td>单选框一</td>
+		<td><div eui="type:radio;id:r1-2;name:r11;checked:true"></td>
+		<td>单选框二</td>
+		<td><div eui="type:radio;id:r1-3;name:r11"></td>
+		<td>单选框三</td>
+	    </tr>
+	    <tr>
+		<td>第二组单选框</td>
+		<td><div eui="type:radio;id:r2-1;name:r21"></td>
+		<td>单选框一</td>
+		<td><div eui="type:radio;id:r2-2;name:r21;checked:true"></td>
+		<td>单选框二</td>
+		<td><div eui="type:radio;id:r2-3;name:r21"></td>
+		<td>单选框三</td>
+	    </tr>
+		</table>
+		<table cellspacing="10">
+		<tr>
+			<td><input eui="type:checkbox;superior:test101" type="checkbox"></td>
+			<td><input eui="type:checkbox;superior:test101" type="checkbox"></td>
+			<td><input eui="type:checkbox;superior:test102" type="checkbox" checked></td>
+			<td><input eui="type:checkbox;superior:test102" type="checkbox"></td>
+			<td><input eui="type:checkbox;superior:test102" type="checkbox"></td>
+		</tr>
+		<tr>
+			<td colspan="2"><input eui="type:checkbox;id:test101;superior:test10" type="checkbox"></td>
+			<td colspan="3"><input eui="type:checkbox;id:test102;superior:test10" type="checkbox"></td>
+		</tr>
+		<tr>
+			<td colspan="5"><input eui="type:checkbox;id:test10" type="checkbox" value="10"></td>
+		</tr>
+		<tr>
+			<td><input eui="type:radio;id:test11;value:test1" type="radio" name="r1"></td>
+			<td><input eui="type:radio;id:test12;value:test2" type="radio" name="r1" checked></td>
+			<td><input eui="type:radio;id:test13;value:test3" type="radio" name="r1"></td>
+			<td><div eui="type:radio;id:test14;value:test4;name:r2" class="radio2"></div></td>
+			<td><div eui="type:radio;id:test15;value:test5;name:r2;checked:true" name="r2" class="radio2"></div></td>
+		</tr>
+		</table>
+	</div>
+	<h2>5.日历效果测试</h2>
+	<div>
+		<div><span id="year"></span>年<span id="month"></span>月</div>
+		<div eui="type:calendar;id:test7"></div>
+		<button onclick="test7.move(-1)">上个月</button><button onclick="test7.move(1)">下个月</button>
+		点击会显示选中的年-月-日
+	</div>
+	<h2>6.浮动层效果测试(限制在当前屏幕范围内拖动，这里有两个层，右上角可以关闭)</h2>
+	<div style="height:120px">
+		<div eui="type:form;id:test8">
+			<label>浮动层一</label>
+			浮动层文字一
+		</div>
+		<div eui="type:form;id:test9">
+			<label>浮动层二</label>
+			浮动层文字二
+		</div>
+	</div>
+	<h2>7.树控件效果测试</h2>
+	<div>
+		<div eui="type:tree;id:test16">
+			<label><font color="blue">根节点</font></label>
+			<div>子节点1</div>
+			<div class="tree1" style="display:none">
+				<label>子节点2</label>
+				<div>子节点2.1</div>
+				<div>子节点2.2</div>
+			</div>
+		</div>
+	</div>
+	<h2>8.表格控件效果测试</h2>
+	<div>
+		<div eui="type:table;id:test17">
+			<div>
+				<label style="width:100px" class="normal">栏目1</label>
+				<label style="width:100px">栏目2</label>
+				<label style="width:100px;overflow:hidden">栏目3(长内容)</label>
+				<label style="width:100px">栏目4</label>
+				<label style="width:100px">栏目5</label>
+				<label style="width:100px">栏目6</label>
+				<label style="width:100px">栏目7</label>
+				<label style="width:100px">栏目8</label>
+				<label style="width:100px">栏目9</label>
+				<label style="width:100px">栏目10</label>
+				<label style="width:100px">栏目11</label>
+				<label style="width:100px">栏目12</label>
+				<label style="width:100px">栏目13</label>
+				<label style="width:100px">栏目14</label>
+				<label style="width:100px">栏目15</label>
+				<label style="width:100px">栏目16</label>
+				<label style="width:100px">栏目17</label>
+				<label style="width:100px">栏目18</label>
+				<label style="width:100px">栏目19</label>
+				<label style="width:100px">栏目20</label>
+			</div>
+			<div>
+				<span>test1</span><span>test1</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span>
+			</div>
+			<div>
+				<span>test2</span><span>test2</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span>
+			</div>
+			<div>
+				<span>test3</span><span>test3</span><span>自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span>
+			</div>
+			<div>
+				<span>test4</span><span>test1</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span>
+			</div>
+			<div>
+				<span>test5</span><span>test2</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span>
+			</div>
+			<div>
+				<span>test6</span><span>test3</span><span>自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span>
+			</div>
+			<div>
+				<span>test7</span><span>test1</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span>
+			</div>
+			<div>
+				<span>test8</span><span>test2</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span>
+			</div>
+			<div>
+				<span>test9</span><span>test3</span><span>自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span>
+			</div>
+			<div>
+				<span>test10</span><span>test3</span><span>自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span>
+			</div>
+			<div>
+				<span>test11</span><span>test1</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span>
+			</div>
+			<div>
+				<span>test12</span><span>test2</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span>
+			</div>
+			<div>
+				<span>test13</span><span>test3</span><span>自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span>
+			</div>
+			<div>
+				<span>test14</span><span>test1</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span>
+			</div>
+			<div>
+				<span>test15</span><span>test2</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span>
+			</div>
+			<div>
+				<span>test16</span><span>test3</span><span>自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span>
+			</div>
+			<div>
+				<span>test17</span><span>test1</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span>
+			</div>
+			<div>
+				<span>test18</span><span>test2</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span>
+			</div>
+			<div>
+				<span>test19</span><span>test3</span><span>自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span>
+			</div>
+			<div>
+				<span>test20</span><span>test3</span><span>自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能自动换行功能</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span><span>test</span>
+			</div>
+		</div>
+	</div>
+	<h2>9.弹出菜单效果测试</h2>
+	<div>
+		<button onclick="test18.show()">点击此处弹出菜单</button>
+		<div eui="type:popup;id:test18">
+			<div>菜单项一</div>
+			<div>
+				<label>菜单项二(子菜单)</label>
+				<div onclick="test16.hide()">隐藏树控件</div>
+				<div onclick="test16.show()">显示树控件</div>
+				<div>菜单项2.3</div>
+				<div>菜单项2.4</div>
+			</div>
+		</div>
+	</div>
+	<h2>10.交换框效果测试</h2>
+	<div>
+		<table>
+		<tr>
+			<td>
+				<div eui="type:exchange;id:test19">
+					<div>选项一</div>
+					<div>选项二</div>
+					<div>选项三</div>
+					<div>选项四</div>
+					<div>选项五</div>
+					<div>选项六</div>
+					<div>选项七</div>
+				</div>
+			</td>
+			<td>
+				<input type="button" value="向右" onclick="test19.moveTo(test20)">
+				<br>
+				<input type="button" value="向左" onclick="test20.moveTo(test19)">
+			</td>
+			<td>
+				<div eui="type:exchange;id:test20">
+				</div>
+			</td>
+		</tr>
+		</table>
+	</div>
+</body>
+<script>
+ECItem.prototype.$create = function () {
+	new ECDecorator(this, 'inline');
+	ECControl.prototype.$create.call(this);
+};
+t = new Date().getTime();
+var test1 = EC('test1');
+t2 = new Date().getTime();
+var test2 = EC('test2');
+var test3 = EC('test3');
+var test4 = EC('test4');
+var test5 = EC('test5');
+var test6 = EC('test6');
+var test7 = EC('test7');
+var test8 = EC('test8');
+var test9 = EC('test9');
+var test10 = EC('test10');
+var test11 = EC('test11');
+var test12 = EC('test12');
+var test13 = EC('test13');
+var test14 = EC('test14');
+var test15 = EC('test15');
+var test16 = EC('test16');
+var test17 = EC('test17');
+var test18 = EC('test18');
+var test19 = EC('test19');
+var test20 = EC('test20');
+test3.onmousedown = function (event) {
+	EC.zoom(this, event, {minWidth: 300, minHeight: 80});
+}
+test3.onblur = function () {
+	this.hide();
+};
+test3.onmousewheel = function (event) {
+	alert(event.wheelDelta < 0 ? '向下滚动' : '向上滚动');
+	return false;
+};
+test4.onkeypress = function (event, param) {
+	if (event.which == 13) {
+		var value = this.getValue().number();
+		if (value >= 100 && value <=300)
+		{
+			test1.setSize(value, value);
+			test2.setSize(value, value);
+		}
+		else
+		{
+			alert('请输入100-300范围内的值');
+		}
+	}
+};
+test6.append('动态添加');
+
+test7.ondateclick = function (year, month, day) {
+	test4.setValue(year + '-' + month + '-' + day);
+	alert(year + '-' + month + '-' + day);
+};
+test7.onchange = function () {
+	G('year').innerHTML = this.getYear();
+	G('month').innerHTML = this.getMonth();
+};
+test7.onchange();
+test16.append('子节点3(动态添加)');
+
+test17.onheadclick = function () {
+	alert(this.getHTML());
+}
+test17.getCol(4).setEditor(EC.create('edit'));
+test17.getCol(3).setEditor(EC.create('edit'));
+test17.getCol(2).setEditor(EC.create('edit'));
+test17.removeRow(4);
+test17.removeCol(1);
+test17.getCol(1).setEllipsis(true);
+test17.getCol(1).setSize(60);
+test17.addRow(['test21', 'test', '动态添加，这一列不会触发省略号模式，会自动折行，第二列已经被动态的删除了', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test']);
+test17.addRow(['test22', '测试数据不足的情况以及动态添加长文本是否自动处理', '测试数据不足的情况以及动态添加长文本是否自动处理，顺便说一句，第5行也被删除了，上面会缺失test5对应的一行']);
+test17.addRow(['test23', 'test', '动态添加，这里是为了测试一次翻到一整行这个功能', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test']);
+test17.addRow(['test24', 'test', '动态添加，这里是为了测试一次翻到一整行这个功能', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test']);
+test17.addRow(['test25', 'test', '动态添加，这里是为了测试一次翻到一整行这个功能', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test']);
+test17.addRow(['test26', 'test', '动态添加，这里是为了测试一次翻到一整行这个功能', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test']);
+test17.addRow(['test27', 'test', '动态添加，这里是为了测试一次翻到一整行这个功能', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test']);
+test17.addRow(['test28', 'test', '动态添加，这里是为了测试一次翻到一整行这个功能', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test']);
+test17.addRow(['test29', 'test', '动态添加，这里是为了测试一次翻到一整行这个功能', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test']);
+test17.addRow(['test30', 'test', '动态添加，这里是为了测试一次翻到一整行这个功能', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test', 'test']);
+
+//test18.setPosition(900, 1500, 'absolute');
+test18.append('菜单项(动态、多级)').append('子菜单').append('子菜单').append('子菜单').append('子菜单').append('子菜单').append('子菜单').append('子菜单').append('子菜单').append('子菜单').append('子菜单').append('子菜单').append('子菜单').append('子菜单').append('子菜单').append('子菜单').append('子菜单').append('子菜单').append('子菜单').append('子菜单');
+
+test19.append('动态添加');
+test19.append('动态添加');
+test19.append('动态添加');
+test19.append('动态添加');
+test19.append('动态添加');
+test19.append('动态添加');
+
+t3 = new Date().getTime();
+
+new ECDecorator(test2, 'inline');
+new ECDecorator(test2, 'outline');
+
+new ECTBDecorator(test3, 'tbdecorator');
+new ECLRDecorator(test3, 'lrdecorator');
+new ECMagicDecorator(test3, 'magicdecorator');
+test2.paint();
+test3.paint();
+
+alert('初始化时间(ms):' + (t2 - t) + ';动态数据加载时间(ms):' + (t3 - t2) + ';装饰器加载时间(ms):' + (new Date().getTime() - t3));
+</script>
+</html>

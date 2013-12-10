@@ -1,0 +1,103 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<style>
+a {
+	color:red;
+}
+</style>
+<body>
+<h1>模块介绍</h1>
+<ul>
+	<li>WSCL(Web Standard Control Library)控件库用来实现标准的控件效果(在IE 6.0,Firefox 2.0,Opera 9.1下测试通过), 使用它能解决浏览器之间的兼容性问题, 样式使用style.js来定义, 没有CSS下重名的可能. </li>
+	<li>Smarty模板库将PHP下广泛应用的Smarty模板引擎移植到了Java平台下</li>
+	<li>Ordinary是一个基于组件拼装结构的轻量级框架, 开发目的不是为了提供强大的功能, 而是为了减少配置的复杂性</li>
+	<li>演示代码都必须工作在JDK 5.0, Servlet 2.4以上的版本下</li>
+</ul>
+<br />
+点击<a href="wscl.html">这里</a>进入WSCL控件库测试页面<br />
+点击<a href="pie.jpeg">这里</a>看饼状图示例<br />
+点击<a href="line.jpeg">这里</a>看线性图示例<br />
+点击<a href="bar.jpeg">这里</a>看柱状图示例<br />
+点击<a href="spider.jpeg">这里</a>看蛛网图示例<br />
+点击<a href="simple.xls">这里</a>看简单Excel填充操作示例<br />
+点击<a href="complex.xls">这里</a>看复杂Excel填充操作示例<br />
+点击<a href="update.html">这里</a>查看更新历史<br />
+<br />
+<h1>开发计划</h1>
+<h2>WSCL</h2>
+<ul>
+	<li>下拉式菜单</li>
+	<li>层选项卡控件(HTMLTab)</li>
+	<li>HTMLInput需要增加方法能够方便的添加验证</li>
+	<li>核心JS库对多种编码, 多国语言包的支持</li>
+	<li>数学工程包</li>
+	<li>增加标准消息框HTMLMessageBox</li>
+</ul>
+<h2>Smarty-IDE</h2>
+<ul>
+	<li>增加助手功能</li>
+	<li>增加include macro函数ctrl+鼠标点击时的打开功能</li>
+	<li>增加wscl控件库的标签功能</li>
+	<li>增加运行环境设置功能</li>
+	<li>增加运行调试功能</li>
+	<li>调试能够将生成的Web页面直接显示出来</li>
+	<li>增加大纲列表的功能</li>
+	<li>增加参数的警告功能</li>
+	<li>增加&lt;script&gt;的分析功能，<font color="red">实现非常的困难, 标签库的嵌套问题无法解决, 除非每次更新都全部重新生成整个文档树, 代价过大</font></li>
+</ul>
+<h2>Ordinary框架</h2>
+<ul>
+	<li>增加对Tomcat连接池的支持</li>
+	<li>增加对Resin连接池的支持</li>
+	<li>增加对Weblogic连接池的支持</li>
+	<li>增加对Websphere连接池的支持</li>
+	<li>增加对Postgresql的支持, 需要测试不同的编码集</li>
+	<li>增加对SQLServer的支持, 需要测试不同的编码集</li>
+	<li>增加对Oracle的支持, 需要测试不同的编码集</li>
+	<li>增加对Sybase的支持, 需要测试不同的编码集</li>
+	<li>增加对DB2的支持, 需要测试不同的编码集</li>
+	<li>增加对ODBC的支持, 需要测试不同的编码集</li>
+	<li>PDF输出</li>
+	<li>Excel/Word输出</li>
+	<li>图表输出</li>
+	<li>报表输出</li>
+	<li>制作集成开发环境</li>
+	<li>整合权限控制, 用户管理</li>
+</ul>
+<h2>用户管理</h2>
+<ul>
+	<li>登录管理, 帐号管理</li>
+	<li>权限管理</li>
+</ul>
+<h2>文本管理</h2>
+<ul>
+	<li>栏目管理, 栏目是树状结构</li>
+	<li>文本管理, 文本可以属于某个栏目, 也可以不属于任何栏目, 每一次更新记录版本信息, 允许恢复历史版本</li>
+	<li>留言管理, 用一个文件保存</li>
+	<li>附件管理, 从属于文本</li>
+	<li>全文搜索</li>
+</ul>
+<h2>文件管理</h2>
+<ul>
+	<li>目录管理</li>
+	<li>文件管理</li>
+	<li>打包上传与下载</li>
+</ul>
+<h2>事件管理</h2>
+<ul>
+	<li>日程管理</li>
+	<li>事件控制</li>
+	<li>进度管理</li>
+</ul>
+<h2>工作流</h2>
+<h2>其它</h2>
+<ul>
+	<li>整理一个php的开发框架, 要求使用配置文件管理数据库连接, 使用MVC方式开发</li>
+	<li>整理sigpai的后台代码并添加注释和测试用例</li>
+	<li>制作sigpai后台的数据升级基础包</li>
+	<li>控件库需要支持.net的控件式开发, 要求把.net的模板方式配置好, 找到各类数据库的连接管理</li>
+</ul>
+</body>
+</html>

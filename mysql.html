@@ -1,0 +1,17 @@
+<html>
+<body>
+{if $list[0]}
+<table border="1">
+{foreach item="item" from=$list}
+<tr>
+	{foreach item="item1" from=$item}
+		<td>{$item1}</td>
+	{/foreach}
+</tr>
+{/foreach}
+</table>
+{else}
+你没有配置好数据库, 请配置/WEB-INF/db.xml
+{/if}
+</body>
+</html>

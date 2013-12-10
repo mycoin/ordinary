@@ -1,0 +1,186 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<style>
+ul {
+	list-style-type:decimal;
+}
+</style>
+<body>
+<h1>BUG与迫切的功能</h1>
+<ul>
+	<li>wscl效率还需要提高</li>
+	<li>先拖动窗体, HTMLTable的行样式定义就失效了</li>
+</ul>
+<h1>Smarty</h1><br />
+<h2>0.1.4 2008/12/12</h2>
+<ul>
+	<li>解除变量调节器连续::时的识别错误</li>
+	<li>去除Template不必要的线程安全控制</li>
+	<li>与JDK 1.5兼容</li>
+</ul>
+<h2>0.1.3 2008/09/01</h2>
+<ul>
+	<li>增加函数repeat,join</li>
+	<li>去除没有配置文件时Engine将出现的初始化异常</li>
+	<li>支持NULL常量</li>
+	<li>支持重定义左右边界符</li>
+	<li>增加简单节点的判断(节点操作不会改变数据容器的值的节点)，区块编译时自动优化，同时针对foreach,section进行了优化</li>
+	<li>增加浮点运算</li>
+	<li>实现and,or比较运算符的短路算法</li>
+	<li>增加break与continue函数用于循环时的控制，增加block函数用于强制要求优化</li>
+	<li>改正literal函数使用后会出现错误定位不准确的问题</li>
+	<li>改正特殊情况下负号的识别错误</li>
+	<li>改进编译器的工作方式, 加快编译速度</li>
+</ul>
+<h2>0.1.2 2008/01/--</h2>
+<ul>
+	<li>取消了$HTMLHead，改为使用HTML标签直接生成&lt;head&gt;头</li>
+	<li>默认的WSCL页面代码改为自动取Smarty框架的语言种类</li>
+	<li>修改了elseif中的函数区块解析方式错误, 应该是使用parseBlock</li>
+</ul>
+<h2>0.1.2 2007/12/1</h2>
+<ul>
+	<li>为IDE新增了测试文件错误的处理, 由出现错误直接产生异常改为了要将全部的文件处理完成后才产生异常</li>
+	<li>将Common类更名为Utilities</li>
+	<li>接口类全部以I开头, HTMLFunction更名为IHTMLControl</li>
+	<li>更正了smarty.properties资源文件不存在时无法加载类路径的错误</li>
+	<li>限制了WSCL组件ID不能重名</li>
+	<li>为Engine类添加了setEncoding方法</li>
+	<li>为HTMLInput类的控件设置name</li>
+	<li>为HTMLCheckbox新增参数value用于设置初始值</li>
+	<li>修改HTMLProcess的setText方法为setValue</li>
+	<li>为wscl库新增了$HTMLHead类</li>
+</ul>
+<h2>0.1.1 2007/3/24</h2>
+<ul>
+	<li>新增macro函数, 用于直接包含文件</li>
+	<li>HTMLControl函数实现了生成脚本与实际处理的分离</li>
+	<li>HTMLControl增加了统一的事件管理, 实现了面向框架的Action基类, 服务器进行统一的事件管理</li>
+	<li>完善了JUnit, 增加了函数的测试用例</li>
+	<li>Statement类增加了私有变量parentClass, 用来规定必须的父类</li>
+	<li>规范了部分成员变量和类的命名</li>
+</ul>
+<h1>WSCL</h1><br />
+<h2>0.1.5 2008/01/--</h2>
+<ul>
+	<li>wscl的{HTMLBody}标签增加属性ajax, 表示直接支持ajax方式调用</li>
+	<li>修正wscl使用HTMLWidget扩展显示后, 内部不接收点击事件的问题</li>
+	<li>增加setEnabled及相关函数，用于屏蔽事件</li>
+	<li>HTMLTable增加对主键列的设置，默认是第一列，可以根据主键列查找对应的行序号，提供了对行的新增/删除的实现</li>
+	<li>改正HTMLTable中setSize会导致高宽度失衡，原因是计算高度宽度时没有考虑到滚动条出现时，高宽度发生了变化</li>
+	<li>改正滚动条控件onShow可能不会被触发的问题，将水平/垂直滚动条的onShow改为setValue</li>
+	<li>HTMLTable在排序状态下，不刷新滚动条</li>
+	<li>HTMLTable中需要提供设置单元格原始数据的功能，单元格也将同步刷新</li>
+</ul>
+<h2>0.1.4 2007/12/01</h2>
+<ul>
+	<li>更正了HTMLPanel在内部元素定位方式是absolute时不能正确计算滚动条区域的问题</li>
+	<li>使用与smarty4j集成标签，初期加载时设置了display:none</li>
+	<li>HTMLForm提供基于showModal的调用模式</li>
+	<li>单选框控件(HTMLRadio与HTMLRadioGroup)</li>
+	<li>修正IHTMLControl，BuildJSFile增加参数Context</li>
+	<li>树状控件(HTMLTreeView)</li>
+	<li>更正HTMLSelect下拉框显示条数不受限制时的打开错误</li>
+	<li>简化HTMLPopupItem增加新选项时的调用方式</li>
+	<li>HTMLColumn改正了sort=false设置无效的问题</li>
+	<li>将MenuItem的FMouseOver事件交到了它的父菜单组的FItemMouseOver来处理</li>
+</ul>
+<h2>0.1.3 2007/4/17</h2>
+<ul>
+	<li>更正了HTMLWindows.FMouseOver方法中关于onMouseOver变量名的错误, 应该是e而不是event</li>
+	<li>解决了鼠标移出窗体时, 不能正常释放drag状态, 以及不执行onMouseOut事件的问题, 移动速度不能太快, 否则移动将中止</li>
+	<li>HTMLForm标题栏的背景图变为前景图后自动清空, 同时图片的显示层顺序下移</li>
+	<li>设定get/setText方法只有HTMLText有效</li>
+	<li>将HTMLProcess的setText方法改为setValue方法</li>
+	<li>实现input数据验证</li>
+	<li>数据提交验证部分的代码完成, 字符串常量独立在message.***.js中定义, ajax提交时如果页面不存在将提示错误</li>
+</ul>
+<h2>0.1.2 2007/4/14</h2>
+<ul>
+	<li>捕获input组件的onblur事件, 重定向到onDeactive上</li>
+	<li>捕获input组件的onfocus事件, 重定向到onActive上</li>
+	<li>捕获input组件的onchange事件, 重定向到onChange上</li>
+	<li>增加HTMLInput组件的setName/getName方法</li>
+	<li>修正HTMLSelect组件显示时的BUG, BUG的表现为当移动滚动条时文本框会处于激活状态</li>
+	<li>修正HTMLMenuItem组件显示时的BUG, BUG的表现为当鼠标移出菜单时可能菜单项的激活状态仍然存在</li>
+	<li>修正事件函数, 设置onkey相关事件的event值, 控件使用onKey***支持相关的事件</li>
+	<li>新增调色板窗体</li>
+	<li>使用缺省处理函数的方案代替重定义的内置事件(on****)</li>
+	<li>菜单处于屏幕边缘时自适应</li>
+	<li>修正了table控件的corner样式中定义的位置</li>
+	<li>修正了form背景图对特殊符号的识别</li>
+	<li>进行HTMLWidget变换时, 不再严格限制要使用规则的三纵三横结构, 允许某些格子display:none</li>
+</ul>
+<h2>0.1.1 2007/3/30</h2>
+<ul>
+	<li>重新对文件进行排版, 注释和代码优化</li>
+	<li>增加了对鼠标移出事件更完整的支持onMouseOut</li>
+	<li>更正了在Firefox下样式第一次加载不成功的BUG, 原因是document.createElement("DIV").style如果不属于文档的结点, FF下将不能利用它操作cssText, 目前改为了使用document.getElementsByTagName("HEAD")[0]结点</li>
+	<li>添加了函数setHeight用于设置控件的高度</li>
+	<li>设置在position不为absolute或relative时控件不能被拖动</li>
+	<li>修正了table存在垂直滚动条并实际向下滚动时, 行样式错误的问题</li>
+</ul>
+<h1>Ordinary Framework</h1><br />
+<h2>0.1.4 2008/12/12</h2>
+<ul>
+	<li>重构代码, 分离Bean管理与Web处理, 实现Bean的高速加载, 去掉包中不必要的类</li>
+	<li>使用JAXP进行DOM解析</li>
+	<li>实现一组新的Coder, 解决原来Coder中的线程冲突</li>
+	<li>实现新的小型httpclient组件</li>
+	<li>Host类能用于分组</li>
+	<li>与JDK 1.5兼容</li>
+</ul>
+<h2>0.1.3 2008/09/01</h2>
+<ul>
+	<li>框架增加IResource接口, 类管理器接口继承自它, 用于释放重加载时占用的资源</li>
+	<li>增加标签类型的识别，这样使用起来更灵活，标签可以有一个根本的类型名称, 这样标签中不需要每次都定义class属性来指定标签关联的对象</li>
+	<li>去除SmartyModule对象, 将org.lilystudio.ordinary.standard.action.NullException改名为NullStatementException, 将org.lilystudio.util.XMLParse改名为XMLParser</li>
+	<li>SelectStatement支持多条并行查询，并能对结果进行简化，如只有一个数据，就不需要[0][0]，如果只有一行，就不需要[0]，如果是多条并行，应该有三层。默认与update都不能支持多条语句查询，UpdateStatement只允许执行insert与update操作</li>
+	<li>SelectStatement支持结果集是单行模式，Map模式和List模式三种，改正SelectStatement中必须要设置totalName，否则不能翻页的问题</li>
+	<li>增加了FORWARDNAME用于识别进入的哪个forward对象</li>
+	<li>查询action的默认翻页属性size,page值改为小写</li>
+	<li>数据过滤器支持浮点数匹配, 精度达到双精度型</li>
+	<li>提供饼状图,柱状图,线性图,蛛网图支持</li>
+	<li>新增Excel输出,允许定义填充数据的格式</li>
+	<li>扩展IParser接口，支持附加参数指定Parser的工作方式，SmartyParser允许回写指定名称的集合值</li>
+	<li>forward中param子标签支持将一个变量转换名称后传递到下一个模块,同时框架内部forward使用session保存信息，这样就不需要在前端url中捆绑参数。</li>
+	<li>提供SessionAction直接操作框架session, ProxyForward支持代理</li>
+	<li>允许直接加载xml,json,excel格式的数据</li>
+	<li>集成页面缓存功能，为文件指定一组关键字用于识别缓存，提供一个接口指定某些操作(增删改等)需要清空哪些缓存，在缓存清空时，只需要指定一部分关键字，查询必须指定完整的关键字。</li>
+	<li>增强import与alias标签的功能，允许给一组标签定义别名，被import导入到指定位置</li>
+	<li>框架能识别所有的基本数据类型</li>
+	<li>支持Session信息自动分组，离开组时将自动清除这些信息</li>
+	<li>增加类MethodAction，允许使用它的不同函数对应处理不同的URL，不再受execute的限制</li>
+	<li>去除SmartyForward中的缓存</li>
+	<li>增加处理时的缺省异常输出，modules节点允许使用import标签导入文件</li>
+</ul>
+<h2>0.1.2 2008/07/24</h2>
+<ul>
+	<li>长度验证支持基于字的长度的验证</li>
+	<li>Session的创建与框架用户信息对象创建同步</li>
+	<li>扩展<param>子标签，跳转时增加选择，是否将参数直接写入Session</li>
+	<li>实现section标签</li>
+	<li>ordinary-config.xml支持加载外部的xml文件作为某一个节点的子节点，使用import属性导入。</li>
+	<li>异常捕获允许通过print属性声明异常是否需要同步输出到控制台。</li>
+	<li>增加web.xml参数DELAY，指定超过多少ms的处理需要输出到日志。</li>
+	<li>改进计算数据库记录总数的算法，不再生成临时表</li>
+	<li>IE中，任何DOM对象如果执行了appendChild方法，则自身的parentNode总是有值，此时要判断它是否有父结点，应该是(!node.parentNode || !node.parentNode.innerHTML)</li>
+	<li>wscl ajax对应的action允许根据事件参数来选择处理不同的操作。<li>
+</ul>
+<h2>0.1.1 2007/4/16</h2>
+<ul>
+	<li>重新对文件进行排版, 注释和代码优化, 建立独立的standard子包, 将框架日志与容器日志合并处理</li>
+	<li>删除Configure对象, 在它的基础上建立了类管理池ClassManagerPool, 将另一部分功能与Controller合并</li>
+	<li>对象初始化时, 向父类递归搜索Field, 并且增加了对init(Element)方法的支持, 用于在对象参数初始化完成后进行最后的初始化, 用于解决参数初始化时无法保证顺序的问题</li>
+	<li>IAction,IFilter等接口的execute方法不再要求返回Relay对象</li>
+	<li>新加基础连接池类, 基础SQL语句类, 以及文本转换器接口, 允许连接池与文本转换器接口进行动态绑定</li>
+	<li>增加对C3P0连接池的支持</li>
+	<li>增加对Mysql的支持</li>
+	<li>增加ListAction用于</li>
+	<li>&lt;alias&gt;增加缺省参数的指定</li>
+	<li><font color="red">使用时请注意WEB-INF/ordinary-config.xml内关于mysql连接池的配置, 根据实际情况重新配置, 否则不能正常运行demo</font></li>
+</ul>
+</body>
+</html>

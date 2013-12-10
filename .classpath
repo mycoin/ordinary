@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="WEB-INF/src/common"/>
+	<classpathentry kind="src" path="WEB-INF/src/ordinary"/>
+	<classpathentry kind="src" path="WEB-INF/src/smarty4j"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/asm-3.0.jar" sourcepath="E:/lib/asm-3.0/src"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/javassist.jar" sourcepath="E:/lib/javassist-3.4/src"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/mail.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/c3p0-0.9.1.1.jar" sourcepath="E:/lib/c3p0-0.9.1.1/src"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/commons-fileupload-1.1.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/mysql-connector-java-5.1.5-bin.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/src/ext-lib/junit.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/src/ext-lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/jfreechart-1.0.10.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/commons-io-1.1.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/jcommon-1.0.13.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/poi-3.1-FINAL-20080629.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/je-3.3.69.jar" sourcepath="E:/lib/je-3.3.75/src"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/velocity-1.6.1-dep.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/activation.jar"/>
+	<classpathentry kind="output" path="WEB-INF/classes"/>
+</classpath>

@@ -1,0 +1,10 @@
+asm-3.0.jar——用于Smarty模块，以及SmartyForward
+c3p0-0.9.1.1.jar——用于C3P0DataSource模块
+commons-fileupload-1.1.jar——用于UploadRelay，处理文件上传
+commons-io-1.1.jar——commons-fileupload-1.1.jar的关联包
+dom4j-1.6.1.jar——用于ordinary框架处理XML文件
+javassist.jar——用于DebugModule模块
+mail.jar——用于MailModule模块
+mysql-connector-java-5.1.5-bin.jar——mysql的JDBC驱动，用于MysqlSelect
+jcommon-1.0.13.jar——jfreechart-1.0.10.jar的关联包
+jfreechart-1.0.10.jar——jfreechart报表引擎

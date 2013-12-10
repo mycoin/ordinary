@@ -1,0 +1,98 @@
+测试模块需要junit以上的版本
+ordinary基本系统使用的包为servlet-api 2.4,dom4j-1.6.1
+ordinary-debug模块使用的包为javassist 3.4
+ordinary-mail模块使用的包为mail.jar,activation.jar(如果要发送二进制数据文件作为附件时使用)
+smarty使用的包为asm-3.0
+
+1.有关WSCL库与Smarty的通用说明
+Smarty所有的标准函数都放在org.lilystudio.smarty.statement.function下，标准变量调节器在org.lilystudio.smarty.statement.modifier下，可以通过更改smarty.properties文件设置其它的包名和环境参数。
+一个配置文件的例子如下：
+
+debug=true
+encoding=UTF-8
+template.path=/
+package.function=org.lilystudio.smarty.statement.wscl
+
+debug参数用于选择模式，当它的值为true时，模板文件更新将会重新加载，否则模板文件更新需要重新运行系统才会重新加载，encoding指定的是模板文件的编码格式，template.path指定的是模板文件的根目录位置，package.function和package.modifier分别用于指定第三方的函数或者变量调节器的包的位置。
+这个配置文件加载了wscl扩展库用于调用Web Standard Component Library的函数。
+有关wscl扩展函数库的使用参数说明请参考包的javadoc文档，例子请参考/demo/demo.html文件，这里需要指出的是demo.html.js是根据demo.html文件动态生成的，当demo.html更新时，js文件也将同步更新。HTMLEvent函数支持设置参数submit=true，这个事件将触发服务器端同名的方法进行AJAX调用，并动态调用HTMLEvent函数中标记的js代码处理客户端数据。
+
+2.基本的配置文件说明
+<ordinary>
+	<alias>
+		<host class="org.lilystudio.ordinary.Host" />
+		<mapping class="org.lilystudio.ordinary.Mapping" />
+		<command class="org.lilystudio.ordinary.Command" />
+		<capture class="org.lilystudio.ordinary.Capture" />
+		<filter class="org.lilystudio.ordinary.filter.LengthFilter" />
+		<filter name="number" class="org.lilystudio.ordinary.filter.NumberFilter" />
+		<filter name="pattern" class="org.lilystudio.ordinary.filter.PatternFilter" />
+		<forward class="org.lilystudio.ordinary.forward.RedirectForward" />
+	</alias>
+	<modules>
+	</modules>
+	<process>
+	</process>
+</ordinary>
+
+<modules>标签用于加载初始化模块，需要手工控制引用ordinary对象池的信息的类，或者全局类将在这里加载。
+<process>标签用于描述HTTP请求的处理标签，<process>中包含的子标签必须实现Process接口，
+子标签以及子标签的子标签，将按照标签名称，根据<alias>和<load>中定义或者加载的别名类递归处理。
+系统内部提供了三个可直接用于<process>下的子标签，分别是<host><mapping><command>
+
+<host>标签用于指定匹配某些域名，需要使用虚拟域名服务时使用这个标签
+name属性用于指定匹配的正则表达式，写name属性时不要再附加^和$这两个行首行尾符号
+root属性用于指定host域的根目录相对于J2EE根目录的位置
+如果忽略root的属性，host域的根目录与J2EE根目录重合
+如：<host name="127\.0\.0\.1" root="/local">
+表示所有本地(127.0.0.1)的请求使用/local目录来处理
+<host>标签下支持使用<filter>和<capture>标签，也支持<mapping><command>等实现Process接口的标签
+
+<mapping>标签用于将简单的请求规则映射到处理程序上，
+<mapping>标签下支持使用<filter>和<capture>标签，同时支持<command>标签
+
+<command>标签具体用于处理一个调用请求，属性包括name和relay，
+name用来定义需要匹配的规则，relay用来定义用于初始化输入数据的对象
+包含四组子标签<filter><action><forward><capture>
+
+<filter>使用过滤器过滤客户提交的数据，系统内置的过滤器包括按长度，按数值，按正则表达式三大类
+这三个filter都通过item来描述具体的变量规则信息。
+对变量进行length判断时，可以在<filter>标签后指定编码集的格式，所有的长度判断均基于字节进行
+缺省是UTF-8编码
+有关其它标签的说明请参见javadoc文档，主要集中在forward,action,filter等几个具体的包上。
+
+框架的扩展说明:
+框架定义的新的构件，对应的原始参数均可以从xml文件中取出，如
+<action class="org.lilystudio.ordinary.action.TestAction" message="Hello World!" />
+TestAction对象的message值可以直接被框架从配置文件中映射，根据具体的对象的不同，还能够映射数值型等，如果类型不匹配框架将直接产生异常提示。如果message属性不是基本类型(如字符串，整数等)，则message将把配置文件中对应的message的值作为key，直接从共享对象池中取出同名的对象，下面是一个例子
+<module name="test" class="org.lilystudio.ordinary.module.C3P0DataSource" driver="org.gjt.mm.mysql.Driver" user="root" password="vefe!@#" url="jdbc:mysql://localhost:3306/tel" />
+<action class="org.lilystudio.ordinary.action.MysqlAction" name="mysql" ds="test" default="20" />
+在这里，MysqlAction初始化的对象，属性ds对象将引用module标签初始化的对象，因为这个对象使用的全局名称为test
+<module>的子标签声明的类都必须实现IModule接口，<process>的子标签都必须实现IProcess接口
+
+调试模组的使用:
+这样可以加载调试模块
+<module class="org.lilystudio.ordinary.module.DebugModule" file="Forward.debug">
+	<debug class="org.lilystudio.ordinary.standard.forward.SmartyForward" />
+</module>
+写在module标签中的file表示默认使用的调试配置文件，每一个debug条目还可以重新定义自己单独的调试配置文件。Forward.debug文件使用的语法与javassist相同，$$表示所有的参数，$1表示第一个参数，依次类推。
+:java.lang.String aaa //表示给这个类增加一个变量
+execute:execute$impl //表示将类中原来的execute函数改名为execute$impl函数，同时用后面的内容生成一个新的execute函数
+{
+  System.out.println(aaa);
+  long time = (new java.util.Date()).getTime();
+  execute$impl($$);
+  System.out.println($3.getDataMap());
+  System.out.println("Run:" + ((new java.util.Date()).getTime() - time));
+}
+
+
+Smarty与框架的集成:
+WEB-INF/lib下加载类库smarty.jar(smarty工程生成):asm-3.0_RC1.jar(或更高的版本)
+<alias>中需要设置smarty的别名，建议使用smarty作为缺省forward处理程序，如
+<forward class="org.lilystudio.ordinary.forward.SmartyForward" />
+<load>中需要加载SmartyModule
+<module class="org.lilystudio.ordinary.extended.SmartyModule" />
+
+WSCL扩展库与框架的集成:
+通过继承org.lilystudio.ordinary.standard.action.WSCLAction，可以将WSCL的HTMLEvent事件名称直接映射进行当前类的同名函数上。

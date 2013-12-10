@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ordinary-config version="0.1">
+	<alias>
+		<import-dom name="alias.xml" />
+		<test>
+			<command name="/simple.xls">
+				<action class="load" name="data" file="excel.json" />
+				<result class="excel" />
+			</command>
+		</test>
+	</alias>
+	<modules>
+		<!--调试模块定义-->
+		<module class="org.lilystudio.ordinary.module.ProxyModule" file="Result.proxy">
+			<proxy class="org.lilystudio.ordinary.web.result.SmartyResult" />
+		</module>
+<!--		<module name="system" class="org.lilystudio.ordinary.web.cache.je.CacheManager" root="page" />-->
+		<import-dom name="db.xml" />
+	</modules>
+
+	<process>
+		<host name=".*">
+		<mapping>
+			<command name="/">
+				<result class="redirect" type="download" url="index.html" />
+			</command>
+			<command name="/mysql.html">
+				<list>
+					<action name="list" default="4" pageName="page">select host,user from user</action>
+				</list>
+				<result />
+				<capture handle="java.sql.SQLException">
+					<result />
+				</capture>
+			</command>
+			<command name="/javaeye.html">
+				<result class="proxy" url="http://www.javaeye.com/" />
+			</command>
+			<command name="/index.html">
+				<result />
+			</command>
+		</mapping>
+		<mapping>
+			<command name="/pie.jpeg">
+<!--				<result class="org.lilystudio.ordinary.web.cache.je.CacheResult" manager="system">
+					<key name="URI" />-->
+					<action class="load" name="data" file="pie.json" />
+					<result class="chart" type="pie" labelFormat="{1}({2})" />
+<!--				</result>-->
+			</command>
+			<!--另一种写法-->
+			<command name="/pie1.jpeg">
+<!--				<action class="org.lilystudio.ordinary.web.cache.je.CacheAction" manager="system">
+					<key name="URI" />-->
+					<action class="load" name="data" file="pie1.json" />
+<!--				</action>-->
+				<result class="chart" type="pie" itemNames="苹果,梨,香蕉,桔子,草莓" />
+			</command>
+			<command name="/line.jpeg">
+				<action class="load" name="data" file="line.json" />
+				<result class="chart" type="line" keys="季节,销量" groupNames="" labelFormat="{2}" />
+			</command>
+			<!--另一种写法-->
+			<command name="/line1.jpeg">
+				<action class="load" name="data" file="line1.json" />
+				<result class="chart" type="line" groupNames="" itemNames="一季度,二季度,三季度,四季度" keys="季节,销量" />
+			</command>
+			<!--另一种写法-->
+			<command name="/line2.jpeg">
+				<action class="load" name="data" file="line2.json" />
+				<result class="chart" type="line" groupNames="苹果,梨" keys="季节,销量" />
+			</command>
+			<command name="/bar.jpeg">
+				<action class="load" name="data" file="bar.json" />
+				<result class="chart" type="bar" title="2008年第一季度水果销量图" itemNames="苹果,梨,香蕉,桔子,草莓" keys="水果,销量" labelFormat="{2}" />
+			</command>
+			<command name="/spider.jpeg">
+				<action class="load" name="data" file="spider.json" />
+				<result class="chart" type="spider" groupNames="梨,苹果" itemNames="2003,2004,2005,2006,2007" labelFormat="{1}({2})" />
+			</command>
+			<command name="/complex.xls">
+				<action class="load" name="data" file="excel.json" />
+				<result class="excel" left="1" format="1:0,1:0,-2:1" path="demo.xls" />
+			</command>
+			<import-dom name="test" />
+		</mapping>
+		</host>
+	</process>
+</ordinary-config>
